@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :update, :destroy]
+  before_action :set_movie, only: [:show, :update, :destroy, :platform_count]
 
   # GET /movies
   def index
@@ -11,6 +11,11 @@ class MoviesController < ApplicationController
   # GET /movies/1
   def show
     render json: @movie
+  end
+
+  def platform_count
+    @movies = Movie.all
+    render json: @movies, each_serializer: MoviePlatformCountSerializer
   end
 
   # POST /movies
